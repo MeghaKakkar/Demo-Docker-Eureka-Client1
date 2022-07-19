@@ -44,7 +44,7 @@ public class DeviceController {
 		return new ResponseEntity<>(listDevice, HttpStatus.OK);
 	}
 	
-	@GetMapping(path = "/getDeviceById/{id}")
+	@GetMapping(path = "/getDeviceById/{deviceId}")
 	public ResponseEntity<List<Device>> getDeviceById(@PathVariable Integer deviceId) {
 		Optional<Device> device = deviceRepo.findById(deviceId);
 		List<Device> deviceList = new ArrayList<Device>();
@@ -72,7 +72,7 @@ public class DeviceController {
 		}
 	}
 	
-	@GetMapping(path = "/getDevicesAndCertificateDetails/{id}")
+	@GetMapping(path = "/getDevicesAndCertificateDetails/{deviceId}")
 	@CircuitBreaker(name=CERT_SERVICE,fallbackMethod = "handleServiceTimeout")
 	public ResponseEntity<RequiredResponseDevice> getDevicesAndCertificateDetails(@PathVariable Integer deviceId) {
 		RequiredResponseDevice requiredResponse=new RequiredResponseDevice();
